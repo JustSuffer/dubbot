@@ -1,0 +1,24 @@
+# Core Deep Learning & PyTorch (CUDA recommended for RTX 3060)
+torch>=2.1.0
+torchaudio>=2.1.0
+
+# Audio & Video Processing
+ffmpeg-python>=0.2.0
+pydub>=0.25.1
+librosa>=0.10.1
+soundfile>=0.12.1
+numpy<2.0.0
+
+# Speech-to-Text (Faster Whisper)
+faster-whisper>=1.0.0
+
+# Neural Translation (HuggingFace NLLB)
+transformers>=4.38.0
+sentencepiece>=0.2.0
+sacremoses>=0.1.1
+
+# Voice Cloning & Text-To-Speech (Coqui XTTSv2)
+TTS>=0.22.0
+
+# Utilities
+tqdm>=4.66.0
