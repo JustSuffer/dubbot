@@ -27,16 +27,24 @@ class VideoMuxer:
     Handles final audio track assembly from timestamped segments and video muxing.
     """
 
-    def __init__(self, sample_rate: int = 16000, audio_bitrate: str = "192k"):
+    def __init__(
+        self,
+        sample_rate: int = 16000,
+        audio_bitrate: str = "192k",
+        audio_codec: str = "aac",
+    ):
         """
         Initialize the VideoMuxer.
 
         Args:
             sample_rate: Audio sample rate in Hz.
-            audio_bitrate: Output AAC audio bitrate for the video file.
+            audio_bitrate: Output audio bitrate (e.g. '192k').
+            audio_codec: Audio codec to use ('aac' or 'mp3'). 'aac' is universal standard,
+                         'mp3' is compatible with embedded webviews like VS Code Video Preview.
         """
         self.sample_rate = sample_rate
         self.audio_bitrate = audio_bitrate
+        self.audio_codec = audio_codec.lower()
 
     def assemble_audio(
         self,
@@ -126,7 +134,7 @@ class VideoMuxer:
                 audio_in["a"],
                 str(dst_video),
                 vcodec="copy",          # Preserve original video streams without quality loss
-                acodec="aac",           # Encode audio track to high-compatibility AAC
+                acodec="libmp3lame" if self.audio_codec == "mp3" else "aac",
                 audio_bitrate=self.audio_bitrate,
                 loglevel="error",
             )

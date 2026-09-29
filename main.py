@@ -104,6 +104,18 @@ def parse_args():
         help="Keep intermediate audio slices and working directory after completion",
     )
     parser.add_argument(
+        "--audio_codec",
+        type=str,
+        default="aac",
+        choices=["aac", "mp3"],
+        help="Audio codec for output video ('aac' for universal standard, 'mp3' for VS Code preview)",
+    )
+    parser.add_argument(
+        "-p", "--play",
+        action="store_true",
+        help="Automatically open dubbed video in default media player when finished",
+    )
+    parser.add_argument(
         "--verbose",
         action="store_true",
         help="Enable detailed debug logs",
@@ -151,6 +163,7 @@ def main():
             device=args.device,
             work_dir=args.work_dir,
             keep_temp=args.keep_temp,
+            audio_codec=args.audio_codec,
         )
         
         result = pipeline.run(
@@ -165,6 +178,17 @@ def main():
         print(f"Output Video : {result['output_video']}")
         print(f"Elapsed Time : {result['elapsed_time_sec']}s")
         print(f"Segments     : {result['total_segments']}")
+
+        if args.play:
+            out_file = str(result["output_video"])
+            import os
+            import subprocess
+            if sys.platform.startswith("win"):
+                os.startfile(out_file)
+            elif sys.platform.startswith("darwin"):
+                subprocess.Popen(["open", out_file])
+            else:
+                subprocess.Popen(["xdg-open", out_file])
         
     except KeyboardInterrupt:
         logging.warning("Dubbing process interrupted by user.")

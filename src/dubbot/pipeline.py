@@ -43,6 +43,7 @@ class DubbingPipeline:
         device: str = "auto",
         work_dir: Optional[str | Path] = None,
         keep_temp: bool = False,
+        audio_codec: str = "aac",
     ):
         """
         Initialize the DubbingPipeline with all modular components.
@@ -57,7 +58,7 @@ class DubbingPipeline:
         self.translator = Translator(model_name=translation_model, device=device)
         self.synthesizer = VoiceSynthesizer(model_name=tts_model, device=device)
         self.aligner = AudioAligner()
-        self.muxer = VideoMuxer()
+        self.muxer = VideoMuxer(audio_codec=audio_codec)
 
     def run(
         self,

@@ -17,6 +17,7 @@ tests/temp_fixtures/
 *.mp4
 *.mkv
 *.aac
+*_report.json
 
 # HuggingFace & Torch cache
 .cache/
