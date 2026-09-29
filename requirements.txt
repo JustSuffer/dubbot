@@ -19,6 +19,12 @@ sacremoses>=0.1.1
 
 # Voice Cloning & Text-To-Speech (Coqui XTTSv2)
 TTS>=0.22.0
+cutlet>=0.5.0
+fugashi>=1.3.0
+unidic-lite>=1.0.8
+pypinyin>=0.50.0
+pyarabic>=0.6.15
 
 # Utilities
 tqdm>=4.66.0
+

@@ -44,6 +44,7 @@ class Transcriber:
         self.cpu_threads = cpu_threads
         self.device, self.compute_type = self._resolve_device_and_compute(device, compute_type)
         self._model = None
+        self.last_detected_language = None
 
     @staticmethod
     def _resolve_device_and_compute(device: str, compute_type: str) -> tuple[str, str]:
@@ -156,6 +157,8 @@ class Transcriber:
                 word_timestamps=word_timestamps,
                 beam_size=5,
             )
+
+            self.last_detected_language = info.language
 
             logger.info(
                 "Detected language: '%s' (probability: %.2f%%), duration: %.2fs",

@@ -144,14 +144,19 @@ class DubbingPipeline:
             # ---------------------------------------------------------
             # Stage 3: Neural Translation
             # ---------------------------------------------------------
-            logger.info("[Stage 3/6] Translating segments to '%s'...", target_lang)
-            # Infer source language if not provided
-            detected_src = source_lang if source_lang and source_lang.lower() != "auto" else "en"
+            # Infer source language from Whisper if not explicitly provided
+            if source_lang and source_lang.lower() != "auto":
+                detected_src = source_lang
+            else:
+                detected_src = self.transcriber.last_detected_language or "en"
+
+            logger.info("Translating %d segments from '%s' to '%s'...", len(segments), detected_src, target_lang)
             translated_segments = self.translator.translate_segments(
                 segments,
                 source_lang=detected_src,
                 target_lang=target_lang,
             )
+
             logger.info("Translation completed:")
             for seg in translated_segments[:3]:
                 logger.info("  [%0.2fs -> %0.2fs]: %s", seg["start"], seg["end"], seg["text"])

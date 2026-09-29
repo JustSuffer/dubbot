@@ -18,7 +18,12 @@ from dubbot.pipeline import DubbingPipeline
 
 
 def setup_logging(verbose: bool = False):
-    """Configure console logging format and level."""
+    """Configure console logging format and level with full UTF-8 support."""
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    if hasattr(sys.stderr, "reconfigure"):
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
     log_level = logging.DEBUG if verbose else logging.INFO
     formatter = logging.Formatter(
         "[%(asctime)s] [%(levelname)s] [%(name)s]: %(message)s",
@@ -26,6 +31,7 @@ def setup_logging(verbose: bool = False):
     )
     handler = logging.StreamHandler(sys.stdout)
     handler.setFormatter(formatter)
+
     
     root_logger = logging.getLogger()
     root_logger.setLevel(log_level)
