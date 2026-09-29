@@ -133,17 +133,32 @@ def main():
         print("\nDubbot - Supported Target Languages (XTTSv2 Zero-Shot Voice Cloning):")
         print("-------------------------------------------------------------------")
         lang_names = {
-            "en": "English", "tr": "Turkish", "es": "Spanish", "fr": "French",
-            "de": "German", "it": "Italian", "pt": "Portuguese", "pl": "Polish",
-            "ru": "Russian", "nl": "Dutch", "cs": "Czech", "ar": "Arabic",
-            "zh-cn": "Chinese (Simplified)", "hu": "Hungarian", "ko": "Korean",
-            "ja": "Japanese", "hi": "Hindi"
+            "ar": "Arapça / Arabic",
+            "cs": "Çekçe / Czech",
+            "de": "Almanca / German",
+            "en": "İngilizce / English",
+            "es": "İspanyolca / Spanish",
+            "fr": "Fransızca / French",
+            "hi": "Hintçe / Hindi",
+            "hu": "Macarca / Hungarian",
+            "it": "İtalyanca / Italian",
+            "ja": "Japonca / Japanese",
+            "ko": "Korece / Korean",
+            "nl": "Flemenkçe / Dutch",
+            "pl": "Lehçe / Polish",
+            "pt": "Portekizce / Portuguese",
+            "ru": "Rusça / Russian",
+            "tr": "Türkçe / Turkish",
+            "zh-cn": "Çince / Chinese (Simplified)",
         }
         for code in sorted(XTTS_LANGUAGES):
             name = lang_names.get(code, code.upper())
             print(f"  {code:<8} : {name}")
-        print("\nExample: python main.py -v video.mp4 -t tr\n")
+        print("\nKullanim / Examples:")
+        print("  Tek dil   : python main.py -v video.mp4 -t japonca")
+        print("  Coklu dil : python main.py -v video.mp4 -t 'japonca, ingilizce, arapca, cince'\n")
         sys.exit(0)
+
 
     if not args.video:
         logging.error("Missing required argument: --video / -v")
@@ -166,21 +181,32 @@ def main():
             audio_codec=args.audio_codec,
         )
         
-        result = pipeline.run(
-            video_path=video_path,
-            target_lang=args.target_lang,
-            source_lang=None if args.source_lang == "auto" else args.source_lang,
-            output_video_path=args.output,
-            speaker_wav=args.speaker_wav,
-        )
-        
-        print("\nDubbing finished successfully!")
-        print(f"Output Video : {result['output_video']}")
-        print(f"Elapsed Time : {result['elapsed_time_sec']}s")
-        print(f"Segments     : {result['total_segments']}")
+        target_langs = [t.strip() for t in args.target_lang.split(",") if t.strip()]
+        results = []
 
-        if args.play:
-            out_file = str(result["output_video"])
+        for tgt in target_langs:
+            out_path = args.output
+            if len(target_langs) > 1 and out_path:
+                p = Path(out_path)
+                out_path = p.parent / f"{p.stem}_{tgt}{p.suffix}"
+
+            res = pipeline.run(
+                video_path=video_path,
+                target_lang=tgt,
+                source_lang=None if args.source_lang == "auto" else args.source_lang,
+                output_video_path=out_path,
+                speaker_wav=args.speaker_wav,
+            )
+            results.append(res)
+
+        print("\n==========================================")
+        print("ALL DUBBING TASKS FINISHED SUCCESSFULLY!")
+        print("==========================================")
+        for r in results:
+            print(f"[{r['target_language'].upper()}] -> {r['output_video']} ({r['elapsed_time_sec']}s)")
+
+        if args.play and results:
+            out_file = str(results[0]["output_video"])
             import os
             import subprocess
             if sys.platform.startswith("win"):
@@ -189,6 +215,7 @@ def main():
                 subprocess.Popen(["open", out_file])
             else:
                 subprocess.Popen(["xdg-open", out_file])
+
         
     except KeyboardInterrupt:
         logging.warning("Dubbing process interrupted by user.")

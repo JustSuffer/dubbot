@@ -24,10 +24,100 @@ XTTS_LANGUAGES = {
 }
 
 LANG_MAP_XTTS = {
+    # Chinese aliases
     "zh": "zh-cn",
     "zh-hans": "zh-cn",
     "zh-hant": "zh-cn",
+    "çince": "zh-cn",
+    "cince": "zh-cn",
+    "chinese": "zh-cn",
+
+    # Japanese aliases
+    "ja": "ja",
+    "japonca": "ja",
+    "japanese": "ja",
+
+    # Arabic aliases
+    "ar": "ar",
+    "arapça": "ar",
+    "arapca": "ar",
+    "arabic": "ar",
+
+    # English aliases
+    "en": "en",
+    "ingilizce": "en",
+    "english": "en",
+
+    # Turkish aliases
+    "tr": "tr",
+    "türkçe": "tr",
+    "turkce": "tr",
+    "turkish": "tr",
+
+    # Spanish aliases
+    "es": "es",
+    "ispanyolca": "es",
+    "spanish": "es",
+
+    # German aliases
+    "de": "de",
+    "almanca": "de",
+    "german": "de",
+
+    # French aliases
+    "fr": "fr",
+    "fransızca": "fr",
+    "fransizca": "fr",
+    "french": "fr",
+
+    # Russian aliases
+    "ru": "ru",
+    "rusça": "ru",
+    "rusca": "ru",
+    "russian": "ru",
+
+    # Italian aliases
+    "it": "it",
+    "italyanca": "it",
+    "italian": "it",
+
+    # Korean aliases
+    "ko": "ko",
+    "korece": "ko",
+    "korean": "ko",
+
+    # Portuguese aliases
+    "pt": "pt",
+    "portekizce": "pt",
+    "portuguese": "pt",
+
+    # Hindi aliases
+    "hi": "hi",
+    "hintçe": "hi",
+    "hintce": "hi",
+    "hindi": "hi",
+
+    # Dutch aliases
+    "nl": "nl",
+    "flemenkçe": "nl",
+    "dutch": "nl",
+
+    # Polish aliases
+    "pl": "pl",
+    "lehçe": "pl",
+    "polish": "pl",
+
+    # Czech aliases
+    "cs": "cs",
+    "çekçe": "cs",
+    "czech": "cs",
+
+    # Hungarian aliases
+    "hu": "hu",
+    "macarca": "hu",
+    "hungarian": "hu",
 }
+
 
 
 class SynthesisError(Exception):

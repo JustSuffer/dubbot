@@ -21,8 +21,9 @@ class TranslationError(Exception):
     pass
 
 
-# Mapping from standard 2-letter ISO 639-1 language codes to NLLB-200 language codes
+# Mapping from standard language codes and common names (Turkish/English) to NLLB-200 codes
 ISO_TO_NLLB: Dict[str, str] = {
+    # ISO Codes
     "en": "eng_Latn",
     "tr": "tur_Latn",
     "es": "spa_Latn",
@@ -32,6 +33,7 @@ ISO_TO_NLLB: Dict[str, str] = {
     "pt": "por_Latn",
     "ru": "rus_Cyrl",
     "zh": "zho_Hans",
+    "zh-cn": "zho_Hans",
     "ja": "jpn_Jpan",
     "ko": "kor_Hang",
     "ar": "arb_Arab",
@@ -49,7 +51,54 @@ ISO_TO_NLLB: Dict[str, str] = {
     "vi": "vie_Latn",
     "th": "tha_Thai",
     "he": "heb_Hebr",
+
+    # Turkish Language Names
+    "japonca": "jpn_Jpan",
+    "ingilizce": "eng_Latn",
+    "arapça": "arb_Arab",
+    "arapca": "arb_Arab",
+    "çince": "zho_Hans",
+    "cince": "zho_Hans",
+    "türkçe": "tur_Latn",
+    "turkce": "tur_Latn",
+    "ispanyolca": "spa_Latn",
+    "almanca": "deu_Latn",
+    "fransızca": "fra_Latn",
+    "fransizca": "fra_Latn",
+    "italyanca": "ita_Latn",
+    "rusça": "rus_Cyrl",
+    "rusca": "rus_Cyrl",
+    "korece": "kor_Hang",
+    "portekizce": "por_Latn",
+    "hintçe": "hin_Deva",
+    "hintce": "hin_Deva",
+    "flemenkçe": "nld_Latn",
+    "lehçe": "pol_Latn",
+    "lehce": "pol_Latn",
+    "çekçe": "ces_Latn",
+    "cekce": "ces_Latn",
+    "macarca": "hun_Latn",
+
+    # English Language Names
+    "japanese": "jpn_Jpan",
+    "english": "eng_Latn",
+    "arabic": "arb_Arab",
+    "chinese": "zho_Hans",
+    "turkish": "tur_Latn",
+    "spanish": "spa_Latn",
+    "german": "deu_Latn",
+    "french": "fra_Latn",
+    "italian": "ita_Latn",
+    "russian": "rus_Cyrl",
+    "korean": "kor_Hang",
+    "portuguese": "por_Latn",
+    "hindi": "hin_Deva",
+    "dutch": "nld_Latn",
+    "polish": "pol_Latn",
+    "czech": "ces_Latn",
+    "hungarian": "hun_Latn",
 }
+
 
 
 class Translator:
