@@ -37,17 +37,27 @@ def parse_args():
         description="Dubbot: 100% Local AI Video Dubbing with Voice Cloning & Timestamp Alignment",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
-    
+    parser.add_argument(
+        "--version",
+        action="version",
+        version="Dubbot v0.1.0",
+        help="Show program's version number and exit",
+    )
+    parser.add_argument(
+        "--list-languages",
+        action="store_true",
+        help="List all supported target languages for zero-shot voice cloning",
+    )
     parser.add_argument(
         "-v", "--video",
         type=str,
-        required=True,
+        default=None,
         help="Path to the input video file (mp4, mkv, mov, etc.)",
     )
     parser.add_argument(
         "-t", "--target_lang",
         type=str,
-        required=True,
+        default=None,
         help="Target language code (e.g. 'tr', 'es', 'fr', 'de', 'en', 'it', 'pt', 'ru', 'ja', 'zh')",
     )
     parser.add_argument(
@@ -106,6 +116,30 @@ def main():
     args = parse_args()
     setup_logging(args.verbose)
     
+    if args.list_languages:
+        from dubbot.synthesizer import XTTS_LANGUAGES
+        print("\nDubbot - Supported Target Languages (XTTSv2 Zero-Shot Voice Cloning):")
+        print("-------------------------------------------------------------------")
+        lang_names = {
+            "en": "English", "tr": "Turkish", "es": "Spanish", "fr": "French",
+            "de": "German", "it": "Italian", "pt": "Portuguese", "pl": "Polish",
+            "ru": "Russian", "nl": "Dutch", "cs": "Czech", "ar": "Arabic",
+            "zh-cn": "Chinese (Simplified)", "hu": "Hungarian", "ko": "Korean",
+            "ja": "Japanese", "hi": "Hindi"
+        }
+        for code in sorted(XTTS_LANGUAGES):
+            name = lang_names.get(code, code.upper())
+            print(f"  {code:<8} : {name}")
+        print("\nExample: python main.py -v video.mp4 -t tr\n")
+        sys.exit(0)
+
+    if not args.video:
+        logging.error("Missing required argument: --video / -v")
+        sys.exit(1)
+    if not args.target_lang:
+        logging.error("Missing required argument: --target_lang / -t")
+        sys.exit(1)
+
     video_path = Path(args.video).resolve()
     if not video_path.is_file():
         logging.error("Video file not found: %s", video_path)
