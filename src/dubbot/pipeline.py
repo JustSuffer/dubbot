@@ -89,10 +89,12 @@ class DubbingPipeline:
 
         # Output video destination
         if output_video_path is None:
-            clean_tgt = target_lang.replace("-", "_")
+            tr_char_map = str.maketrans("çğışöüÇĞİŞÖÜ", "cgisouCGISOU")
+            clean_tgt = target_lang.translate(tr_char_map).replace("-", "_").lower()
             out_video = video_file.parent / f"{video_file.stem}_dubbed_{clean_tgt}.mp4"
         else:
             out_video = Path(output_video_path).resolve()
+
 
         # Workspace directory for intermediate files
         if self.custom_work_dir:

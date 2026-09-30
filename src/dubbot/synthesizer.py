@@ -26,11 +26,15 @@ XTTS_LANGUAGES = {
 LANG_MAP_XTTS = {
     # Chinese aliases
     "zh": "zh-cn",
+    "zh-cn": "zh-cn",
     "zh-hans": "zh-cn",
     "zh-hant": "zh-cn",
+    "zh-tw": "zh-cn",
     "çince": "zh-cn",
     "cince": "zh-cn",
     "chinese": "zh-cn",
+    "mandarin": "zh-cn",
+    "mandarince": "zh-cn",
 
     # Japanese aliases
     "ja": "ja",

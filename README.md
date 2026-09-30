@@ -104,10 +104,23 @@ python main.py --video "sample.mp4" --target_lang "tr"
 python main.py -v "interview.mp4" -t "tr"
 ```
 
+**Dub a video to Chinese (Simplified / Çince):**
+```bash
+python main.py -v "speech.mp4" -t "çince" -p
+# or with language code:
+python main.py -v "speech.mp4" -t "zh-cn" -p
+```
+
+**Dub a video into multiple languages at once (Japanese, English, Arabic, Chinese):**
+```bash
+python main.py -v "speech.mp4" -t "japonca, ingilizce, arapça, çince"
+```
+
 **Dub a Spanish tutorial to German using high-accuracy Whisper model:**
 ```bash
 python main.py -v "tutorial.mp4" -s "es" -t "de" --whisper_model "small"
 ```
+
 
 ---
 
