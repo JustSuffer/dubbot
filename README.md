@@ -177,18 +177,30 @@ dubbot/
 
 ---
 
-## Supported Target Languages
+## Supported Target Languages & Aliases
 
-The following 17 languages are natively supported with zero-shot voice cloning:
+The following 17 languages are natively supported with zero-shot voice cloning. You can specify target languages using ISO language codes or natural language names (in Turkish or English):
 
-| Language | Code | Language | Code | Language | Code |
-|---|---|---|---|---|---|
-| English | `en` | Turkish | `tr` | Spanish | `es` |
-| French | `fr` | German | `de` | Italian | `it` |
-| Portuguese | `pt` | Polish | `pl` | Russian | `ru` |
-| Dutch | `nl` | Czech | `cs` | Arabic | `ar` |
-| Chinese | `zh` | Japanese | `ja` | Korean | `ko` |
-| Hungarian | `hu` | Hindi | `hi` | | |
+| Language | Code | Aliases (Turkish / English) |
+|---|---|---|
+| Turkish | `tr` | `türkçe`, `turkce`, `turkish` |
+| English | `en` | `ingilizce`, `english` |
+| Spanish | `es` | `ispanyolca`, `spanish` |
+| French | `fr` | `fransızca`, `french` |
+| German | `de` | `almanca`, `german` |
+| Italian | `it` | `italyanca`, `italian` |
+| Portuguese | `pt` | `portekizce`, `portuguese` |
+| Polish | `pl` | `lehçe`, `polish` |
+| Russian | `ru` | `rusça`, `russian` |
+| Dutch | `nl` | `flemenkçe`, `dutch` |
+| Czech | `cs` | `çekçe`, `czech` |
+| Arabic | `ar` | `arapça`, `arabic` |
+| Chinese (Simplified) | `zh` | `çince`, `cince`, `chinese`, `mandarin`, `zh-cn` |
+| Japanese | `ja` | `japonca`, `japanese` |
+| Korean | `ko` | `korece`, `korean` |
+| Hungarian | `hu` | `macarca`, `hungarian` |
+| Hindi | `hi` | `hintçe`, `hindi` |
+
 
 ---
 
